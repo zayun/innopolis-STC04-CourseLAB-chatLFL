@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +41,15 @@ public class LanguageList implements LFLChatLoadable {
     public synchronized void loadFromDB() throws SQLException {
         if (downloaded) languages = null;
         DatabaseManager dbm = new DatabaseManager();
-        ResultSet rs = dbm.loadFromDB("select * from \"Main\".\"d_Languages\"");
+        Statement stmt = dbm.loadFromDB();
+        ResultSet rs = stmt.executeQuery("select * from \"Main\".\"d_Languages\"");
         while (rs.next()) {
             Language language = new Language(rs.getString("ShortName"),
                     rs.getString("FullName"), rs.getString("dialekt"));
             languages.add(language);
         }
         rs.close();
+        stmt.close();
         downloaded = true;
     }
 

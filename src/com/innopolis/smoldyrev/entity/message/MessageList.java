@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class MessageList implements LFLChatLoadable {
         if (downloaded) messages = null;
 
         DatabaseManager dbm = new DatabaseManager();
-        ResultSet rs = dbm.loadFromDB("select * from \"Main\".\"r_Messages\"");
+        Statement stmt = dbm.loadFromDB();
+        ResultSet rs = stmt.executeQuery("select * from \"Main\".\"r_Messages\"");
         while (rs.next()) {
             Message message =
                     new Message(rs.getInt("id"),
@@ -55,6 +57,7 @@ public class MessageList implements LFLChatLoadable {
             messages.add(message);
         }
         rs.close();
+        stmt.close();
         downloaded = true;
     }
 }

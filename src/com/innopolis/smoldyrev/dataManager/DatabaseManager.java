@@ -8,7 +8,6 @@ import java.sql.*;
 public class DatabaseManager {
 
     private static Connection connection;
-    private static Statement stmt;
 
     public static void initDatabase(String login, String password) {
 
@@ -28,11 +27,11 @@ public class DatabaseManager {
         initDatabase("postgres", "123456");
     }
 
-    public ResultSet loadFromDB(String sqlText) throws SQLException {
+    public Statement loadFromDB() throws SQLException {
 
-        stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(sqlText);
-        return rs;
+        Statement stmt = connection.createStatement();
+
+        return stmt;
     }
 
     public static Connection getConnection() {
@@ -48,12 +47,4 @@ public class DatabaseManager {
         }
     }
 
-    public static void closeStatement() {
-        try {
-            if (stmt != null)
-                stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

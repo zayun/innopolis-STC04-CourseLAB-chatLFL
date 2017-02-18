@@ -17,32 +17,31 @@ public class ThreadForSerialize implements Runnable {
 
     private LFLChatLoadable obj;
     private String filePath;
+    private static final Object lock = new Object();
 
-    public static Object getLock() {
-        return lock;
-    }
-
-    private static Object lock = new Object();
 
     public ThreadForSerialize(LFLChatLoadable obj, String filePath) {
+
         this.obj = obj;
         this.filePath = filePath;
-
     }
 
     @Override
     public void run() {
-        System.out.println("=>" + obj.getClass());
+
         checkLinkedTables(obj.getClass());
-        System.out.println("====>" + obj.getClass());
+
         try {
             obj.loadFromDB();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        System.out.println("========>" + obj.getClass());
         FileManager.saveToFile(obj, filePath);
+
+        synchronized (lock) {
+            lock.notifyAll();
+        }
     }
 
     public void checkLinkedTables(Class objClass) {
@@ -51,42 +50,32 @@ public class ThreadForSerialize implements Runnable {
             synchronized (lock) {
                 while (!PersonList.isDownloaded()) {
                     try {
-                        System.out.println("ul");
                         lock.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                lock.notifyAll();
             }
-        }
-
-        if (objClass.equals(LangOwnerList.class)) {
+        } else if (objClass.equals(LangOwnerList.class)) {
             synchronized (lock) {
                 while (!LanguageList.isDownloaded() ||
                         !PersonList.isDownloaded()) {
                     try {
-                        System.out.println("lol");
                         lock.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                lock.notifyAll();
             }
-        }
-
-        if (objClass.equals(MessageList.class)) {
+        } else if (objClass.equals(MessageList.class)) {
             synchronized (lock) {
                 while (!UserList.isDownloaded()) {
                     try {
-                        System.out.println("ml");
                         lock.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                lock.notifyAll();
             }
         }
     }

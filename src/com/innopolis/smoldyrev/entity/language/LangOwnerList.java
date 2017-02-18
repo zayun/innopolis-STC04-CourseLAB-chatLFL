@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class LangOwnerList implements LFLChatLoadable {
         if (downloaded) langOwners = null;
 
         DatabaseManager dbm = new DatabaseManager();
-        ResultSet rs = dbm.loadFromDB("select * from \"Main\".\"r_LangOwner\"");
+        Statement stmt = dbm.loadFromDB();
+        ResultSet rs = stmt.executeQuery("select * from \"Main\".\"r_LangOwner\"");
         while (rs.next()) {
             LangOwner langOwner = new LangOwner(
                     PersonList.getPersonOnID(rs.getInt("idPerson")),
@@ -53,6 +55,7 @@ public class LangOwnerList implements LFLChatLoadable {
             langOwners.add(langOwner);
         }
         rs.close();
+        stmt.close();
         downloaded = true;
     }
 /*похоже не понадобится*/

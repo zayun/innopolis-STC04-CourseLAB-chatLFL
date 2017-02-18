@@ -1,24 +1,17 @@
 package com.innopolis.smoldyrev;
 
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
-import com.innopolis.smoldyrev.dataManager.FileManager;
-import com.innopolis.smoldyrev.entity.language.LangOwner;
 
 import com.innopolis.smoldyrev.entity.language.LangOwnerList;
-import com.innopolis.smoldyrev.entity.language.Language;
 
 import com.innopolis.smoldyrev.entity.language.LanguageList;
 import com.innopolis.smoldyrev.entity.message.MessageList;
-import com.innopolis.smoldyrev.entity.person.Person;
 
 import com.innopolis.smoldyrev.entity.person.PersonList;
 import com.innopolis.smoldyrev.entity.user.UserList;
-import com.innopolis.smoldyrev.threads.ThreadControl;
 import com.innopolis.smoldyrev.threads.ThreadForSerialize;
 
-import javax.xml.crypto.Data;
 import java.sql.SQLException;
-import java.util.Date;
 
 public class Main {
 
@@ -37,8 +30,6 @@ public class Main {
 
         MessageList messageList = new MessageList();
 
-        Thread tc = new Thread(new ThreadControl());
-        tc.start();
         Thread t1 = new Thread(new ThreadForSerialize(personList, "temp/persones.xml"));
         Thread t2 = new Thread(new ThreadForSerialize(languageList, "temp/languages.xml"));
         Thread t3 = new Thread(new ThreadForSerialize(userList, "temp/users.xml"));
@@ -59,7 +50,6 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        DatabaseManager.closeStatement();
         DatabaseManager.closeConnection();
 
 //

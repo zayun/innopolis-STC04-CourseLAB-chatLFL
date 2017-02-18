@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,13 +46,15 @@ public class UserList implements LFLChatLoadable {
         if (downloaded) users = null;
 
         DatabaseManager dbm = new DatabaseManager();
-        ResultSet rs = dbm.loadFromDB("select * from \"Main\".\"d_Users\"");
+        Statement stmt = dbm.loadFromDB();
+        ResultSet rs = stmt.executeQuery("select * from \"Main\".\"d_Users\"");
         while (rs.next()) {
             User user = new User(rs.getInt("userID"), rs.getString("login"), rs.getString("pwd"),
                     PersonList.getPersonOnID(rs.getInt("personID")));
             users.add(user);
         }
         rs.close();
+        stmt.close();
         downloaded = true;
     }
 
