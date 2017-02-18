@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * Created by smoldyrev on 16.02.17.
  */
-@XmlType(propOrder={"login","passwd","person"})
+@XmlType(propOrder={"login","passwd","person","blocked"})
 @XmlRootElement
 public class User {
 
@@ -19,15 +19,26 @@ public class User {
     private String login;
     private String passwd;
     private Person person;
+    private boolean blocked;
 
     public User() {
     }
 
-    public User(Integer userID, String login, String passwd, Person person) {
+    public User(Integer userID, String login, String passwd, Person person, boolean blocked) {
         this.userID = userID;
         this.login = login;
         this.passwd = passwd;
         this.person = person;
+        this.blocked = blocked;
+    }
+
+    @XmlElement
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     @XmlAttribute(name = "id")

@@ -62,7 +62,7 @@ public class UserList implements LFLChatLoadable {
         ResultSet rs = stmt.executeQuery("select * from \"Main\".\"d_Users\"");
         while (rs.next()) {
             User user = new User(rs.getInt("userID"), rs.getString("login"), rs.getString("pwd"),
-                    PersonList.getPersonOnID(rs.getInt("personID")));
+                    PersonList.getPersonOnID(rs.getInt("personID")),rs.getBoolean("blocked"));
             users.add(user);
         }
         rs.close();
@@ -76,8 +76,8 @@ public class UserList implements LFLChatLoadable {
             DatabaseManager dbm = new DatabaseManager();
             PreparedStatement pstmt = dbm.getPrepearedStatement(
                     "INSERT INTO \"Main\".\"d_Users\"(\n" +
-                            "\t\"userID\", login, pwd, \"personID\")\n" +
-                            "\tVALUES (?, ?, ?, ?)");
+                            "\t\"userID\", login, pwd, \"personID\", \"blocked\")\n" +
+                            "\tVALUES (?, ?, ?, ?, ?)");
             try {
                 for (User user :
                         users) {
@@ -85,6 +85,7 @@ public class UserList implements LFLChatLoadable {
                     pstmt.setString(2, user.getLogin());
                     pstmt.setString(3, user.getPasswd());
                     pstmt.setInt(4, user.getPerson().getId());
+                    pstmt.setBoolean(5, user.isBlocked());
                     pstmt.executeUpdate();
                 }
                 uploaded = true;

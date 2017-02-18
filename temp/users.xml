@@ -11,6 +11,7 @@
             <email>eee@gmail.com</email>
             <phoneNumber>+791299999</phoneNumber>
         </person>
+        <blocked>false</blocked>
     </users>
     <users id="8">
         <login>login2</login>
@@ -23,6 +24,7 @@
             <email>eaaa@gmail.com</email>
             <phoneNumber>+791299999</phoneNumber>
         </person>
+        <blocked>false</blocked>
     </users>
     <users id="9">
         <login>login3</login>
@@ -35,5 +37,6 @@
             <email>rrrr@gmail.com</email>
             <phoneNumber>+791299999</phoneNumber>
         </person>
+        <blocked>false</blocked>
     </users>
 </Group>

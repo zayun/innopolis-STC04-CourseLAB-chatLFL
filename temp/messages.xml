@@ -13,6 +13,7 @@
                 <email>eee@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </fromUser>
         <toUser id="8">
             <login>login2</login>
@@ -25,6 +26,7 @@
                 <email>eaaa@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </toUser>
         <bodyText>Привет</bodyText>
         <viewed>true</viewed>
@@ -42,6 +44,7 @@
                 <email>eaaa@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </fromUser>
         <toUser id="7">
             <login>login1</login>
@@ -54,6 +57,7 @@
                 <email>eee@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </toUser>
         <bodyText>Hi</bodyText>
         <viewed>true</viewed>
@@ -71,6 +75,7 @@
                 <email>eee@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </fromUser>
         <toUser id="8">
             <login>login2</login>
@@ -83,6 +88,7 @@
                 <email>eaaa@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </toUser>
         <bodyText>Как дела?</bodyText>
         <viewed>true</viewed>
@@ -100,6 +106,7 @@
                 <email>eaaa@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </fromUser>
         <toUser id="7">
             <login>login1</login>
@@ -112,6 +119,7 @@
                 <email>eee@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </toUser>
         <bodyText>I am fine,thnx.and u?</bodyText>
         <viewed>true</viewed>
@@ -129,6 +137,7 @@
                 <email>eee@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </fromUser>
         <toUser id="8">
             <login>login2</login>
@@ -141,6 +150,7 @@
                 <email>eaaa@gmail.com</email>
                 <phoneNumber>+791299999</phoneNumber>
             </person>
+            <blocked>false</blocked>
         </toUser>
         <bodyText>У меня тоже все хорошо</bodyText>
         <viewed>true</viewed>
