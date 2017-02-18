@@ -1,9 +1,7 @@
 package com.innopolis.smoldyrev.entity.language;
 
-import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
-import com.innopolis.smoldyrev.entity.message.Message;
 import com.innopolis.smoldyrev.exception.NoDataException;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,12 +15,24 @@ import java.util.List;
  */
 @XmlType
 @XmlRootElement(name = "Group")
-public class LanguageList extends AbstractEntityList {
+public class LanguageList implements LFLChatLoadable {
 
     private static List<Language> languages = new ArrayList<>();
 
     public List<Language> getLanguages() {
         return languages;
+    }
+
+    private static volatile boolean downloaded = false;
+
+    private static volatile boolean uploaded = false;
+
+    public static boolean isDownloaded() {
+        return downloaded;
+    }
+
+    public static boolean isUploaded() {
+        return uploaded;
     }
 
     public void setLanguages(List<Language> languages) {
@@ -45,7 +55,7 @@ public class LanguageList extends AbstractEntityList {
         }
         rs.close();
         stmt.close();
-        setDownloaded(true);
+        downloaded=true;;
     }
 
     public synchronized void uploadToDB() throws SQLException, NoDataException {
@@ -64,7 +74,7 @@ public class LanguageList extends AbstractEntityList {
                     pstmt.setString(3, language.getDialekt());
                     pstmt.executeUpdate();
                 }
-                setUploaded(true);
+                uploaded = true;;
             } finally {
                 pstmt.close();
             }

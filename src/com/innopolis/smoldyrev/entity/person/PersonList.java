@@ -1,27 +1,38 @@
 package com.innopolis.smoldyrev.entity.person;
 
-import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
+import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.exception.NoDataException;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 /**
  * Created by smoldyrev on 16.02.17.
  */
 @XmlType
 @XmlRootElement
-public class PersonList extends AbstractEntityList {
-
+public class PersonList implements LFLChatLoadable {
 
     private static List<Person> persons = new ArrayList<>();
 
     public List<Person> getPersons() {
         return persons;
+    }
+
+    private static volatile boolean downloaded = false;
+
+    private static volatile boolean uploaded = false;
+
+    public static boolean isDownloaded() {
+        return downloaded;
+    }
+
+    public static boolean isUploaded() {
+        return uploaded;
     }
 
     public void add(Person person) {
@@ -46,7 +57,7 @@ public class PersonList extends AbstractEntityList {
         }
         rs.close();
         stmt.close();
-        setDownloaded(true);
+        downloaded=true;
     }
 
     public synchronized void uploadToDB() throws SQLException, NoDataException {
@@ -66,15 +77,13 @@ public class PersonList extends AbstractEntityList {
                     pstmt.setInt(1, person.getId());
                     pstmt.setString(2, person.getFirstName());
                     pstmt.setString(3, person.getLastName());
-                    pstmt.setDate(4, new Date(person.getBirthDay().getYear()
-                            , person.getBirthDay().getMonth(),
-                            person.getBirthDay().getDay()));
+                    pstmt.setDate(4, new Date(person.getBirthDay().getTime()));
                     pstmt.setString(5, person.getEmail());
                     pstmt.setString(6, person.getPhoneNumber());
                     pstmt.setBoolean(7, person.isMale());
                     pstmt.executeUpdate();
                 }
-                setUploaded(true);
+                uploaded = true;
             } finally {
                 pstmt.close();
             }

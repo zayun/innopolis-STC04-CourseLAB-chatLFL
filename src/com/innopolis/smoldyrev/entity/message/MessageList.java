@@ -1,7 +1,7 @@
 package com.innopolis.smoldyrev.entity.message;
 
-import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
+import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.entity.user.UserList;
 import com.innopolis.smoldyrev.exception.NoDataException;
 
@@ -17,9 +17,21 @@ import java.util.List;
  */
 @XmlType
 @XmlRootElement
-public class MessageList extends AbstractEntityList{
+public class MessageList implements LFLChatLoadable {
 
     private static List<Message> messages = new ArrayList<>();
+
+    private static volatile boolean downloaded = false;
+
+    private static volatile boolean uploaded = false;
+
+    public static boolean isDownloaded() {
+        return downloaded;
+    }
+
+    public static boolean isUploaded() {
+        return uploaded;
+    }
 
     public void setMessages(List<Message> messages) {
         MessageList.messages = messages;
@@ -51,7 +63,7 @@ public class MessageList extends AbstractEntityList{
         }
         rs.close();
         stmt.close();
-        setDownloaded(true);
+        downloaded=true;
     }
 
     public synchronized void uploadToDB() throws SQLException, NoDataException {
@@ -75,7 +87,7 @@ public class MessageList extends AbstractEntityList{
 
                     pstmt.executeUpdate();
                 }
-                setUploaded(true);
+                uploaded = true;
             } finally {
                 pstmt.close();
             }

@@ -34,5 +34,17 @@ public class DeserializeAllTables {
         t2.start();
         t4.start();
         t5.start();
+
+        try {
+            t1.join();
+            t2.join();
+            t3.join();
+            t4.join();
+            t5.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        DatabaseManager.closeConnection();
     }
 }

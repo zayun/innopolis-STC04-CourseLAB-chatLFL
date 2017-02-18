@@ -90,11 +90,12 @@ public class Person {
         this.male = male;
     }
 
-    @XmlElement
+
     public Date getBirthDay() {
         return birthDay;
     }
 
+    @XmlElement
     public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
     }

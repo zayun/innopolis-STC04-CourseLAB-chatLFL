@@ -4,7 +4,6 @@ package com.innopolis.smoldyrev.entity.language;
  * Created by smoldyrev on 17.02.17.
  */
 
-import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
 import com.innopolis.smoldyrev.entity.person.PersonList;
@@ -21,9 +20,21 @@ import java.util.List;
 
 @XmlType
 @XmlRootElement(name = "Group")
-public class LangOwnerList extends AbstractEntityList {
+public class LangOwnerList implements LFLChatLoadable {
 
     private static List<LangOwner> langOwners = new ArrayList<>();
+
+    private static volatile boolean downloaded = false;
+
+    private static volatile boolean uploaded = false;
+
+    public static boolean isDownloaded() {
+        return downloaded;
+    }
+
+    public static boolean isUploaded() {
+        return uploaded;
+    }
 
     public List<LangOwner> getLangOwners() {
         return langOwners;
@@ -53,7 +64,7 @@ public class LangOwnerList extends AbstractEntityList {
         }
         rs.close();
         stmt.close();
-        setDownloaded(true);
+        downloaded=true;
     }
 
     public synchronized void uploadToDB() throws SQLException, NoDataException {
@@ -72,7 +83,7 @@ public class LangOwnerList extends AbstractEntityList {
                     pstmt.setInt(3, langOwner.getLevel());
                     pstmt.executeUpdate();
                 }
-                setUploaded(true);
+                uploaded = true;
             } finally {
                 pstmt.close();
             }
