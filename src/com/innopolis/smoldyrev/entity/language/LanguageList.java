@@ -1,13 +1,13 @@
 package com.innopolis.smoldyrev.entity.language;
 
-import com.innopolis.smoldyrev.LFLChatLoadable;
+import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
+import com.innopolis.smoldyrev.entity.message.Message;
+import com.innopolis.smoldyrev.exception.NoDataException;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class LanguageList implements LFLChatLoadable {
     public synchronized void loadFromDB() throws SQLException {
         if (downloaded) languages = null;
         DatabaseManager dbm = new DatabaseManager();
-        Statement stmt = dbm.loadFromDB();
+        Statement stmt = dbm.getStatement();
         ResultSet rs = stmt.executeQuery("select * from \"Main\".\"d_Languages\"");
         while (rs.next()) {
             Language language = new Language(rs.getString("ShortName"),
@@ -59,5 +59,27 @@ public class LanguageList implements LFLChatLoadable {
             if (id.equals(lang.getShortName())) return lang;
         }
         return null;
+    }
+
+    public synchronized void uploadToDB() throws SQLException, NoDataException {
+
+        if (languages != null) {
+            DatabaseManager dbm = new DatabaseManager();
+            PreparedStatement pstmt = dbm.getPrepearedStatement(
+                    "INSERT INTO \"Main\".\"d_Languages\"(\n" +
+                            "\t\"ShortName\", \"FullName\", dialekt)\n" +
+                            "\tVALUES (?, ?, ?);");
+            try {
+                for (Language language :
+                        languages) {
+                    pstmt.setString(4, language.getShortName());
+                    pstmt.setString(4, language.getFullName());
+                    pstmt.setString(4, language.getDialekt());
+                    pstmt.executeUpdate();
+                }
+            } finally {
+                pstmt.close();
+            }
+        } else throw new NoDataException("Отсутствуют данные для загрузки");
     }
 }

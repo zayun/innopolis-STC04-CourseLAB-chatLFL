@@ -1,6 +1,6 @@
 package com.innopolis.smoldyrev.threads;
 
-import com.innopolis.smoldyrev.LFLChatLoadable;
+import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.FileManager;
 import com.innopolis.smoldyrev.entity.language.LangOwnerList;
 import com.innopolis.smoldyrev.entity.language.LanguageList;

@@ -1,13 +1,13 @@
 package com.innopolis.smoldyrev.entity.person;
 
-import com.innopolis.smoldyrev.LFLChatLoadable;
+import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
+import com.innopolis.smoldyrev.entity.user.User;
+import com.innopolis.smoldyrev.exception.NoDataException;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class PersonList implements LFLChatLoadable {
         if (downloaded) persons = null;
         DatabaseManager dbm = new DatabaseManager();
 
-        Statement stmt = dbm.loadFromDB();
+        Statement stmt = dbm.getStatement();
         ResultSet rs = stmt.executeQuery("select * from \"Main\".\"d_Persons\"");
         while (rs.next()) {
             Person person = new Person(rs.getInt("personID"), rs.getString("FirstName"), rs.getString("LastName"),
@@ -53,6 +53,40 @@ public class PersonList implements LFLChatLoadable {
         rs.close();
         stmt.close();
         downloaded = true;
+    }
+
+    public synchronized void uploadToDB() throws SQLException, NoDataException {
+
+        if (persons != null) {
+            DatabaseManager dbm = new DatabaseManager();
+            PreparedStatement pstmt = dbm.getPrepearedStatement(
+                    "INSERT INTO \"Main\".\"d_Persons\"(\n" +
+                            "\t\"personID\", \"FirstName\", \"LastName\", " +
+                            "\"birthDay\", email, \"phoneNumber\", male)\n" +
+                            "\tVALUES (?, ?, ?, ?, ?, ?, ?);");
+            try {
+
+                System.out.println(persons.size());
+                for (Person person :
+                        persons) {
+
+                    pstmt.setInt(1, person.getId());
+                    pstmt.setString(2, person.getFirstName());
+                    pstmt.setString(3, person.getLastName());
+                    pstmt.setDate (4, new Date(person.getBirthDay().getYear()
+                            ,person.getBirthDay().getMonth(),
+                            person.getBirthDay().getDay()));
+                    pstmt.setString(5, person.getEmail());
+                    pstmt.setString(6, person.getPhoneNumber());
+                    pstmt.setBoolean(7, person.isMale());
+                    pstmt.executeUpdate();
+                }
+            }
+            finally {
+                pstmt.close();
+                System.out.println("1");
+            }
+        } else throw new NoDataException("Отсутствуют данные для загрузки");
     }
 
     public static Person getPersonOnID(int id) {

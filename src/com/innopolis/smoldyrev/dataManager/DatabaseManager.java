@@ -27,11 +27,18 @@ public class DatabaseManager {
         initDatabase("postgres", "123456");
     }
 
-    public Statement loadFromDB() throws SQLException {
+    public Statement getStatement() throws SQLException {
 
         Statement stmt = connection.createStatement();
 
         return stmt;
+    }
+
+    public PreparedStatement getPrepearedStatement(String sqlText) throws SQLException {
+
+        PreparedStatement pstmt = connection.prepareStatement(sqlText);
+
+        return pstmt;
     }
 
     public static Connection getConnection() {

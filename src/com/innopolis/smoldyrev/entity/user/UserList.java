@@ -1,12 +1,14 @@
 package com.innopolis.smoldyrev.entity.user;
 
-import com.innopolis.smoldyrev.LFLChatLoadable;
+import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
 import com.innopolis.smoldyrev.entity.person.PersonList;
+import com.innopolis.smoldyrev.exception.NoDataException;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,7 +48,7 @@ public class UserList implements LFLChatLoadable {
         if (downloaded) users = null;
 
         DatabaseManager dbm = new DatabaseManager();
-        Statement stmt = dbm.loadFromDB();
+        Statement stmt = dbm.getStatement();
         ResultSet rs = stmt.executeQuery("select * from \"Main\".\"d_Users\"");
         while (rs.next()) {
             User user = new User(rs.getInt("userID"), rs.getString("login"), rs.getString("pwd"),
@@ -58,10 +60,33 @@ public class UserList implements LFLChatLoadable {
         downloaded = true;
     }
 
+    public synchronized void uploadToDB() throws SQLException, NoDataException {
+
+        if (users != null) {
+            DatabaseManager dbm = new DatabaseManager();
+            PreparedStatement pstmt = dbm.getPrepearedStatement(
+                    "INSERT INTO \"Main\".\"d_Users\"(\n" +
+                            "\t\"userID\", login, pwd, \"personID\")\n" +
+                            "\tVALUES (?, ?, ?, ?)");
+            try {
+                for (User user :
+                        users) {
+                    pstmt.setInt(1, user.getUserID());
+                    pstmt.setString(2, user.getLogin());
+                    pstmt.setString(3, user.getPasswd());
+                    pstmt.setInt(4, user.getPerson().getId());
+                    pstmt.executeUpdate();
+                }
+            } finally {
+                pstmt.close();
+            }
+        } else throw new NoDataException("Отсутствуют данные для загрузки");
+    }
+
     public static User getUserOnID(int id) {
-        for (User user:
+        for (User user :
                 users) {
-            if (user.getUserID()==id) return user;
+            if (user.getUserID() == id) return user;
         }
         return null;
     }

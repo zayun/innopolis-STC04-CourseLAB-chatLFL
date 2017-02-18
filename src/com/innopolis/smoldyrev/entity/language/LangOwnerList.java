@@ -4,12 +4,14 @@ package com.innopolis.smoldyrev.entity.language;
  * Created by smoldyrev on 17.02.17.
  */
 
-import com.innopolis.smoldyrev.LFLChatLoadable;
+import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
 import com.innopolis.smoldyrev.entity.person.PersonList;
+import com.innopolis.smoldyrev.exception.NoDataException;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,7 +47,7 @@ public class LangOwnerList implements LFLChatLoadable {
         if (downloaded) langOwners = null;
 
         DatabaseManager dbm = new DatabaseManager();
-        Statement stmt = dbm.loadFromDB();
+        Statement stmt = dbm.getStatement();
         ResultSet rs = stmt.executeQuery("select * from \"Main\".\"r_LangOwner\"");
         while (rs.next()) {
             LangOwner langOwner = new LangOwner(
@@ -58,16 +60,26 @@ public class LangOwnerList implements LFLChatLoadable {
         stmt.close();
         downloaded = true;
     }
-/*похоже не понадобится*/
-/*    public static LangOwner getLangOwner(int personId, String langId) {
-        for (LangOwner langOwner :
-                langOwners) {
-            if ((langOwner.getPerson().getId() == personId)
-                    && (langId.equals(langOwner.getLanguage().getShortName()))) {
-                return langOwner;
-            }
-        }
-        return null;
-    }*/
 
+    public synchronized void uploadToDB() throws SQLException, NoDataException {
+
+        if (langOwners != null) {
+            DatabaseManager dbm = new DatabaseManager();
+            PreparedStatement pstmt = dbm.getPrepearedStatement(
+                    "INSERT INTO \"Main\".\"r_LangOwner\"(\n" +
+                            "\t\"idPerson\", \"idLang\", level)\n" +
+                            "\tVALUES (?, ?, ?);");
+            try {
+                for (LangOwner langOwner :
+                        langOwners) {
+                    pstmt.setInt(4, langOwner.getPerson().getId());
+                    pstmt.setString(4, langOwner.getLanguage().getShortName());
+                    pstmt.setInt(4, langOwner.getLevel());
+                    pstmt.executeUpdate();
+                }
+            } finally {
+                pstmt.close();
+            }
+        } else throw new NoDataException("Отсутствуют данные для загрузки");
+    }
 }

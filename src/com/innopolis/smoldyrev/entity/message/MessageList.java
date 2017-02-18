@@ -1,15 +1,13 @@
 package com.innopolis.smoldyrev.entity.message;
 
-import com.innopolis.smoldyrev.LFLChatLoadable;
+import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
-import com.innopolis.smoldyrev.entity.user.User;
 import com.innopolis.smoldyrev.entity.user.UserList;
+import com.innopolis.smoldyrev.exception.NoDataException;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +43,7 @@ public class MessageList implements LFLChatLoadable {
         if (downloaded) messages = null;
 
         DatabaseManager dbm = new DatabaseManager();
-        Statement stmt = dbm.loadFromDB();
+        Statement stmt = dbm.getStatement();
         ResultSet rs = stmt.executeQuery("select * from \"Main\".\"r_Messages\"");
         while (rs.next()) {
             Message message =
@@ -59,5 +57,32 @@ public class MessageList implements LFLChatLoadable {
         rs.close();
         stmt.close();
         downloaded = true;
+    }
+
+    public synchronized void uploadToDB() throws SQLException, NoDataException {
+
+        if (messages != null) {
+            DatabaseManager dbm = new DatabaseManager();
+            PreparedStatement pstmt = dbm.getPrepearedStatement(
+                    "INSERT INTO \"Main\".\"r_Messages\"(\n" +
+                            "\tid, \"FromUserID\", \"ToUserID\", " +
+                            "\"BodyText\", \"isRead\", \"DateTime\")\n" +
+                            "\tVALUES (?, ?, ?, ?, ?, ?);");
+            try {
+                for (Message message :
+                        messages) {
+                    pstmt.setInt(1, message.getId());
+                    pstmt.setInt(2, message.getFromUser().getUserID());
+                    pstmt.setInt(3, message.getToUser().getUserID());
+                    pstmt.setString(4, message.getBodyText());
+                    pstmt.setBoolean(5, message.isViewed());
+                    pstmt.setTimestamp(6, (Timestamp) message.getDate());
+
+                    pstmt.executeUpdate();
+                }
+            } finally {
+                pstmt.close();
+            }
+        } else throw new NoDataException("Отсутствуют данные для загрузки");
     }
 }
