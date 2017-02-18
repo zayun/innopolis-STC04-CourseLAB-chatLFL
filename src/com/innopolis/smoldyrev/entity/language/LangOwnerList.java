@@ -72,6 +72,7 @@ public class LangOwnerList extends AbstractEntityList {
                     pstmt.setInt(3, langOwner.getLevel());
                     pstmt.executeUpdate();
                 }
+                setUploaded(true);
             } finally {
                 pstmt.close();
             }

@@ -75,6 +75,7 @@ public class MessageList extends AbstractEntityList{
 
                     pstmt.executeUpdate();
                 }
+                setUploaded(true);
             } finally {
                 pstmt.close();
             }

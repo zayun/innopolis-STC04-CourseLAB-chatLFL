@@ -37,9 +37,8 @@ public class ThreadForSerialize implements Runnable {
 
     @Override
     public void run() {
-        if (pack) {
-            checkLinkedTables(obj.getClass());
-        }
+        if (pack) checkLinkedTables(obj.getClass());
+
 
         try {
             obj.loadFromDB();

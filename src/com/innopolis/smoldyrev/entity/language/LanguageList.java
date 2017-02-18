@@ -64,6 +64,7 @@ public class LanguageList extends AbstractEntityList {
                     pstmt.setString(3, language.getDialekt());
                     pstmt.executeUpdate();
                 }
+                setUploaded(true);
             } finally {
                 pstmt.close();
             }

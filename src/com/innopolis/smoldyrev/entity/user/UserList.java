@@ -72,6 +72,7 @@ public class UserList extends AbstractEntityList{
                     pstmt.setInt(4, user.getPerson().getId());
                     pstmt.executeUpdate();
                 }
+                setUploaded(true);
             } finally {
                 pstmt.close();
             }

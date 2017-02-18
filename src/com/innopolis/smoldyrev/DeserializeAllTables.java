@@ -22,6 +22,8 @@ public class DeserializeAllTables {
         LangOwnerList langOwnerList = new LangOwnerList();
         MessageList messageList = new MessageList();
 
+        ThreadForDeserialize.setPack(true);
+
         Thread t1 = new Thread(new ThreadForDeserialize(personList, "temp/persones.xml"));
         Thread t2 = new Thread(new ThreadForDeserialize(languageList, "temp/languages.xml"));
         Thread t3 = new Thread(new ThreadForDeserialize(userList, "temp/users.xml"));
