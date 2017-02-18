@@ -7,6 +7,7 @@ import com.innopolis.smoldyrev.exception.NoDataException;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ public class MessageList implements LFLChatLoadable {
                     pstmt.setInt(3, message.getToUser().getUserID());
                     pstmt.setString(4, message.getBodyText());
                     pstmt.setBoolean(5, message.isViewed());
-                    pstmt.setTimestamp(6, (Timestamp) message.getDate());
+                    pstmt.setTimestamp(6, new Timestamp(message.getDate().getTime()));
 
                     pstmt.executeUpdate();
                 }

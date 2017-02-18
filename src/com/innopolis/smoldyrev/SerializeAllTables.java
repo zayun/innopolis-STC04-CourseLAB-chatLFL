@@ -13,16 +13,18 @@ import com.innopolis.smoldyrev.threads.ThreadForSerialize;
  */
 public class SerializeAllTables {
 
-    public static void go(){
+    public static void go() {
+
+
         DatabaseManager.initDatabase();
 
         PersonList personList = new PersonList();
         LanguageList languageList = new LanguageList();
-
         UserList userList = new UserList();
         LangOwnerList langOwnerList = new LangOwnerList();
-
         MessageList messageList = new MessageList();
+
+        ThreadForSerialize.setPack(true);
 
         Thread t1 = new Thread(new ThreadForSerialize(personList, "temp/persones.xml"));
         Thread t2 = new Thread(new ThreadForSerialize(languageList, "temp/languages.xml"));
@@ -35,15 +37,6 @@ public class SerializeAllTables {
         t4.start();
         t5.start();
 
-        try {
-            t1.join();
-            t2.join();
-            t3.join();
-            t4.join();
-            t5.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        DatabaseManager.closeConnection();
+
     }
 }

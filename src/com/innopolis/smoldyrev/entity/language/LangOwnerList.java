@@ -72,9 +72,9 @@ public class LangOwnerList implements LFLChatLoadable {
             try {
                 for (LangOwner langOwner :
                         langOwners) {
-                    pstmt.setInt(4, langOwner.getPerson().getId());
-                    pstmt.setString(4, langOwner.getLanguage().getShortName());
-                    pstmt.setInt(4, langOwner.getLevel());
+                    pstmt.setInt(1, langOwner.getPerson().getId());
+                    pstmt.setString(2, langOwner.getLanguage().getShortName());
+                    pstmt.setInt(3, langOwner.getLevel());
                     pstmt.executeUpdate();
                 }
             } finally {

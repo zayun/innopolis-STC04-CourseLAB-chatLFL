@@ -1,64 +1,117 @@
 package com.innopolis.smoldyrev;
 
-import com.innopolis.smoldyrev.dataManager.DatabaseManager;
-
-import com.innopolis.smoldyrev.dataManager.FileManager;
-import com.innopolis.smoldyrev.entity.LFLChatLoadable;
-import com.innopolis.smoldyrev.entity.language.LangOwnerList;
-
-import com.innopolis.smoldyrev.entity.language.LanguageList;
-import com.innopolis.smoldyrev.entity.message.MessageList;
-
-import com.innopolis.smoldyrev.entity.person.PersonList;
-import com.innopolis.smoldyrev.entity.user.UserList;
-import com.innopolis.smoldyrev.exception.NoDataException;
-import com.innopolis.smoldyrev.threads.ThreadForSerialize;
-
-import javax.xml.bind.JAXBException;
-import java.io.File;
-import java.sql.SQLException;
-
 public class Main {
 
     public static void main(String[] args){
 
-        PersonList pl = new PersonList();
-        LFLChatLoadable obj = pl;
-        File file = new File("temp/persones.xml");
+        DeserializeAllTables.go();
 
-        DatabaseManager.initDatabase();
 
-        try {
-            obj = (LFLChatLoadable) FileManager.getObject(file,obj.getClass());
-            try {
-                obj.uploadToDB();
-            } catch (NoDataException e) {
-                System.out.println(e.getMessage());
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        } catch (JAXBException e) {
-            System.out.println(e.getMessage());
-        }
 
-        UserList ul = new UserList();
-        obj = ul;
-        file = new File("temp/users.xml");
+//
+//        PersonList pl = new PersonList();
+//        LFLChatLoadable obj = pl;
+//        File file = new File("temp/persones.xml");
 
-        try {
-            obj = (LFLChatLoadable) FileManager.getObject(file,obj.getClass());
-            try {
-                obj.uploadToDB();
-            } catch (NoDataException e) {
-                System.out.println(e.getMessage());
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        } catch (JAXBException e) {
-            System.out.println(e.getMessage());
-        }
-        DatabaseManager.closeConnection();
+//        DatabaseManager.initDatabase();
+//        ThreadForSerialize.setPack(false);
+//        MessageList messageList = new MessageList();
+//        Thread t5 = new Thread(new ThreadForSerialize(messageList, "temp/messages2.xml"));
+//        t5.start();
+
+
+//        try {
+//            t5.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+//        MessageList ml = new MessageList();
+//        obj = ml;
+//        file = new File("temp/messages.xml");
+//
+//        try {
+//            obj = (LFLChatLoadable) FileManager.getObject(obj.getClass(),file);
+//            try {
+//                obj.uploadToDB();
+//            } catch (NoDataException e) {
+//                System.out.println(e.getMessage());
+//            } catch (SQLException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        } catch (JAXBException e) {
+//            System.out.println(e.getMessage());
+//        }
+
+//        DatabaseManager.closeConnection();
+
+//        try {
+//            obj = (LFLChatLoadable) FileManager.getObject(file,obj.getClass());
+//            try {
+//                obj.uploadToDB();
+//            } catch (NoDataException e) {
+//                System.out.println(e.getMessage());
+//            } catch (SQLException e) {
+//                System.out.println(e.getMessage());
+//                e.printStackTrace();
+//            }
+//        } catch (JAXBException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        UserList ul = new UserList();
+//        obj = ul;
+//        file = new File("temp/users.xml");
+//
+//        try {
+//            obj = (LFLChatLoadable) FileManager.getObject(file,obj.getClass());
+//            try {
+//                obj.uploadToDB();
+//            } catch (NoDataException e) {
+//                System.out.println(e.getMessage());
+//            } catch (SQLException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        } catch (JAXBException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        LanguageList ll = new LanguageList();
+//        obj = ll;
+//        file = new File("temp/languages.xml");
+//
+//        try {
+//            obj = (LFLChatLoadable) FileManager.getObject(file,obj.getClass());
+//            try {
+//                obj.uploadToDB();
+//            } catch (NoDataException e) {
+//                System.out.println(e.getMessage());
+//            } catch (SQLException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        } catch (JAXBException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        LangOwnerList lol = new LangOwnerList();
+//        obj = lol;
+//        file = new File("temp/langOwners.xml");
+//
+//        try {
+//            obj = (LFLChatLoadable) FileManager.getObject(file,obj.getClass());
+//            try {
+//                obj.uploadToDB();
+//            } catch (NoDataException e) {
+//                System.out.println(e.getMessage());
+//            } catch (SQLException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        } catch (JAXBException e) {
+//            System.out.println(e.getMessage());
+//        }
+
+
+
 
     }
 }

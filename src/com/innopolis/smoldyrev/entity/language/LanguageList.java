@@ -72,9 +72,9 @@ public class LanguageList implements LFLChatLoadable {
             try {
                 for (Language language :
                         languages) {
-                    pstmt.setString(4, language.getShortName());
-                    pstmt.setString(4, language.getFullName());
-                    pstmt.setString(4, language.getDialekt());
+                    pstmt.setString(1, language.getShortName());
+                    pstmt.setString(2, language.getFullName());
+                    pstmt.setString(3, language.getDialekt());
                     pstmt.executeUpdate();
                 }
             } finally {

@@ -17,6 +17,7 @@ public class ThreadForSerialize implements Runnable {
 
     private LFLChatLoadable obj;
     private String filePath;
+    private static boolean pack = false;
     private static final Object lock = new Object();
 
 
@@ -26,10 +27,19 @@ public class ThreadForSerialize implements Runnable {
         this.filePath = filePath;
     }
 
+    public static boolean isPack() {
+        return pack;
+    }
+
+    public static void setPack(boolean pack) {
+        ThreadForSerialize.pack = pack;
+    }
+
     @Override
     public void run() {
-
-        checkLinkedTables(obj.getClass());
+        if (pack) {
+            checkLinkedTables(obj.getClass());
+        }
 
         try {
             obj.loadFromDB();

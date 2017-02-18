@@ -24,7 +24,8 @@ public class FileManager {
         }
     }
 
-    public static Object getObject(File file, Class c) throws JAXBException {
+    public static Object getObject(Class c, String filePath) throws JAXBException {
+        File file = new File(filePath);
         JAXBContext context = JAXBContext.newInstance(c);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         Object object = unmarshaller.unmarshal(file);
