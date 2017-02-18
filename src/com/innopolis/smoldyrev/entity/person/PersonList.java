@@ -1,6 +1,6 @@
 package com.innopolis.smoldyrev.entity.person;
 
-import com.innopolis.smoldyrev.entity.LFLChatLoadable;
+import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
 import com.innopolis.smoldyrev.exception.NoDataException;
 
@@ -15,21 +15,10 @@ import java.util.List;
  */
 @XmlType
 @XmlRootElement
-public class PersonList implements LFLChatLoadable {
+public class PersonList extends AbstractEntityList {
 
-    private static volatile boolean downloaded = false;
-
-    private static volatile boolean uploaded = false;
 
     private static List<Person> persons = new ArrayList<>();
-
-    public static boolean isDownloaded() {
-        return downloaded;
-    }
-
-    public static boolean isUploaded() {
-        return downloaded;
-    }
 
     public List<Person> getPersons() {
         return persons;
@@ -43,8 +32,8 @@ public class PersonList implements LFLChatLoadable {
         this.persons = persons;
     }
 
-    public void loadFromDB() throws SQLException {
-        if (downloaded) persons = null;
+    public synchronized void loadFromDB() throws SQLException {
+        if (isDownloaded()) persons = null;
         DatabaseManager dbm = new DatabaseManager();
 
         Statement stmt = dbm.getStatement();
@@ -57,7 +46,7 @@ public class PersonList implements LFLChatLoadable {
         }
         rs.close();
         stmt.close();
-        downloaded = true;
+        setDownloaded(true);
     }
 
     public synchronized void uploadToDB() throws SQLException, NoDataException {
@@ -85,7 +74,7 @@ public class PersonList implements LFLChatLoadable {
                     pstmt.setBoolean(7, person.isMale());
                     pstmt.executeUpdate();
                 }
-                uploaded = true;
+                setUploaded(true);
             } finally {
                 pstmt.close();
             }

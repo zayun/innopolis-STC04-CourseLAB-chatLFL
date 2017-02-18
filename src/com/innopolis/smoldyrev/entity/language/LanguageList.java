@@ -1,5 +1,6 @@
 package com.innopolis.smoldyrev.entity.language;
 
+import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
 import com.innopolis.smoldyrev.entity.message.Message;
@@ -16,15 +17,9 @@ import java.util.List;
  */
 @XmlType
 @XmlRootElement(name = "Group")
-public class LanguageList implements LFLChatLoadable {
-
-    private static volatile boolean downloaded = false;
+public class LanguageList extends AbstractEntityList {
 
     private static List<Language> languages = new ArrayList<>();
-
-    public static boolean isDownloaded() {
-        return downloaded;
-    }
 
     public List<Language> getLanguages() {
         return languages;
@@ -39,7 +34,7 @@ public class LanguageList implements LFLChatLoadable {
     }
 
     public synchronized void loadFromDB() throws SQLException {
-        if (downloaded) languages = null;
+        if (isDownloaded()) languages = null;
         DatabaseManager dbm = new DatabaseManager();
         Statement stmt = dbm.getStatement();
         ResultSet rs = stmt.executeQuery("select * from \"Main\".\"d_Languages\"");
@@ -50,15 +45,7 @@ public class LanguageList implements LFLChatLoadable {
         }
         rs.close();
         stmt.close();
-        downloaded = true;
-    }
-
-    public static Language getLangOnShortName(String id) {
-        for (Language lang:
-                languages) {
-            if (id.equals(lang.getShortName())) return lang;
-        }
-        return null;
+        setDownloaded(true);
     }
 
     public synchronized void uploadToDB() throws SQLException, NoDataException {
@@ -82,4 +69,13 @@ public class LanguageList implements LFLChatLoadable {
             }
         } else throw new NoDataException("Отсутствуют данные для загрузки");
     }
+
+    public static Language getLangOnShortName(String id) {
+        for (Language lang:
+                languages) {
+            if (id.equals(lang.getShortName())) return lang;
+        }
+        return null;
+    }
+
 }

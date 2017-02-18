@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Created by smoldyrev on 18.02.17.
  */
-public abstract class AbstractEntityList {
+public abstract class AbstractEntityList implements LFLChatLoadable{
 
     private static volatile boolean downloaded = false;
 

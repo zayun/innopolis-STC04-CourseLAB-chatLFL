@@ -1,5 +1,6 @@
 package com.innopolis.smoldyrev.entity.user;
 
+import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
 import com.innopolis.smoldyrev.entity.person.PersonList;
@@ -21,15 +22,9 @@ import java.util.List;
 
 @XmlType
 @XmlRootElement(name = "Group")
-public class UserList implements LFLChatLoadable {
-
-    private static volatile boolean downloaded = false;
+public class UserList extends AbstractEntityList{
 
     private static List<User> users = new ArrayList<>();
-
-    public static boolean isDownloaded() {
-        return downloaded;
-    }
 
     public List<User> getUsers() {
         return users;
@@ -45,7 +40,7 @@ public class UserList implements LFLChatLoadable {
 
     public synchronized void loadFromDB() throws SQLException {
 
-        if (downloaded) users = null;
+        if (isDownloaded()) users = null;
 
         DatabaseManager dbm = new DatabaseManager();
         Statement stmt = dbm.getStatement();
@@ -57,7 +52,7 @@ public class UserList implements LFLChatLoadable {
         }
         rs.close();
         stmt.close();
-        downloaded = true;
+        setDownloaded(true);
     }
 
     public synchronized void uploadToDB() throws SQLException, NoDataException {
