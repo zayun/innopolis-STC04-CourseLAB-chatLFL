@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Group>
+    <langOwners>
+        <person id="1">
+            <firstName>Smoldyrev</firstName>
+            <lastName>Egor</lastName>
+            <male>true</male>
+            <birthDay>1986-09-23T00:00:00+04:00</birthDay>
+            <email>eee@gmail.com</email>
+            <phoneNumber>+791299999</phoneNumber>
+        </person>
+        <language id="RUS">
+            <fullName>Russian</fullName>
+            <dialekt>GEN</dialekt>
+        </language>
+        <level>10</level>
+    </langOwners>
+    <langOwners>
+        <person id="1">
+            <firstName>Smoldyrev</firstName>
+            <lastName>Egor</lastName>
+            <male>true</male>
+            <birthDay>1986-09-23T00:00:00+04:00</birthDay>
+            <email>eee@gmail.com</email>
+            <phoneNumber>+791299999</phoneNumber>
+        </person>
+        <language id="ENG">
+            <fullName>English</fullName>
+            <dialekt>Britain</dialekt>
+        </language>
+        <level>7</level>
+    </langOwners>
+    <langOwners>
+        <person id="2">
+            <firstName>Smoldyreva</firstName>
+            <lastName>Elena</lastName>
+            <male>false</male>
+            <birthDay>1986-02-11T00:00:00+03:00</birthDay>
+            <email>eaaa@gmail.com</email>
+            <phoneNumber>+791299999</phoneNumber>
+        </person>
+        <language id="RUS">
+            <fullName>Russian</fullName>
+            <dialekt>GEN</dialekt>
+        </language>
+        <level>10</level>
+    </langOwners>
+    <langOwners>
+        <person id="2">
+            <firstName>Smoldyreva</firstName>
+            <lastName>Elena</lastName>
+            <male>false</male>
+            <birthDay>1986-02-11T00:00:00+03:00</birthDay>
+            <email>eaaa@gmail.com</email>
+            <phoneNumber>+791299999</phoneNumber>
+        </person>
+        <language id="ENG">
+            <fullName>English</fullName>
+            <dialekt>Britain</dialekt>
+        </language>
+        <level>5</level>
+    </langOwners>
+    <langOwners>
+        <person id="2">
+            <firstName>Smoldyreva</firstName>
+            <lastName>Elena</lastName>
+            <male>false</male>
+            <birthDay>1986-02-11T00:00:00+03:00</birthDay>
+            <email>eaaa@gmail.com</email>
+            <phoneNumber>+791299999</phoneNumber>
+        </person>
+        <language id="UKR">
+            <fullName>Ukraine</fullName>
+            <dialekt>GEN</dialekt>
+        </language>
+        <level>5</level>
+    </langOwners>
+    <langOwners>
+        <person id="3">
+            <firstName>Smoldyreva</firstName>
+            <lastName>Raisa</lastName>
+            <male>false</male>
+            <birthDay>2016-07-15T00:00:00+03:00</birthDay>
+            <email>rrrr@gmail.com</email>
+            <phoneNumber>+791299999</phoneNumber>
+        </person>
+        <language id="RUS">
+            <fullName>Russian</fullName>
+            <dialekt>GEN</dialekt>
+        </language>
+        <level>1</level>
+    </langOwners>
+</Group>

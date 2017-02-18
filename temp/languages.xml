@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Group>
+    <languages id="ENG_USA">
+        <fullName>English American</fullName>
+        <dialekt>USA</dialekt>
+    </languages>
+    <languages id="CHN">
+        <fullName>Chinese</fullName>
+        <dialekt>General</dialekt>
+    </languages>
+    <languages id="CHN_CAN">
+        <fullName>Chinese Canton</fullName>
+        <dialekt>Cantonese</dialekt>
+    </languages>
+    <languages id="RUS">
+        <fullName>Russian</fullName>
+        <dialekt>GEN</dialekt>
+    </languages>
+    <languages id="UKR">
+        <fullName>Ukraine</fullName>
+        <dialekt>GEN</dialekt>
+    </languages>
+    <languages id="ENG">
+        <fullName>English</fullName>
+        <dialekt>Britain</dialekt>
+    </languages>
+</Group>
