@@ -23,9 +23,9 @@ public class FileManager {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(obj, file);
-            logger.trace(obj.getClass() + " was serialized to " + filePath);
+            logger.trace(obj.getClass().getSimpleName() + " was serialized to " + filePath);
         } catch (JAXBException e) {
-            logger.error(e.getMessage());
+            logger.error(e);
             System.out.println(e.getMessage());
         }
     }

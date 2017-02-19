@@ -38,7 +38,8 @@ public class SerializeAllTables {
             t4.join();
             t5.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("Ошибка выполнения потока");
         }
 
         DatabaseManager.closeConnection();

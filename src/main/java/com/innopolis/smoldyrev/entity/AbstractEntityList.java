@@ -19,6 +19,7 @@ public abstract class AbstractEntityList<T> implements LFLChatLoadable {
 
     protected static Logger logger = Logger.getLogger(AbstractEntityList.class);
 
+
     private List<T> listEntities = new ArrayList<>();
 
     private volatile boolean downloaded = false;
@@ -69,6 +70,7 @@ public abstract class AbstractEntityList<T> implements LFLChatLoadable {
         rs.close();
         stmt.close();
         setDownloaded(true);
+
         logger.trace("data was serialized from table: "+getTableName());
     }
 

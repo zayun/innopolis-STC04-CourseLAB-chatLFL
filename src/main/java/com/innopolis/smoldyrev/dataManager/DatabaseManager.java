@@ -23,10 +23,10 @@ public class DatabaseManager {
 
             logger.trace("Successful connect to base: "+url);
         } catch (ClassNotFoundException e) {
-            logger.error(e.getMessage());
+            logger.error(e);
             System.out.println("Не найден драйвер");
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.error(e);
             System.out.println("Ошибка подключение к БД!");
         }
     }
@@ -37,16 +37,24 @@ public class DatabaseManager {
 
     public Statement getStatement() throws SQLException {
 
-        Statement stmt = connection.createStatement();
+        if (connection != null) {
+            Statement stmt = connection.createStatement();
+            return stmt;
+        } else {
+            logger.error("connection is null");
+            throw new SQLException("Соединение не создано!");
+        }
 
-        return stmt;
     }
 
     public PreparedStatement getPrepearedStatement(String sqlText) throws SQLException {
-
-        PreparedStatement pstmt = connection.prepareStatement(sqlText);
-
-        return pstmt;
+        if (connection != null) {
+            PreparedStatement pstmt = connection.prepareStatement(sqlText);
+            return pstmt;
+        } else {
+            logger.error("connection is null");
+            throw new SQLException("Соединение не создано!");
+        }
     }
 
     public static Connection getConnection() {
@@ -59,8 +67,8 @@ public class DatabaseManager {
                 connection.close();
             logger.trace("Connection was closed");
         } catch (SQLException e) {
+            logger.error(e);
             System.out.println("Невозможно закрыть соединение!");
-            System.out.println(e.getMessage());
         }
     }
 

@@ -16,8 +16,8 @@ public class Main {
 
     public static void main(String[] args){
 
-        SerializeAllTables.go();
-//        DeserializeAllTables.go();
+//        SerializeAllTables.go();
+        DeserializeAllTables.go();
 
     }
 }
