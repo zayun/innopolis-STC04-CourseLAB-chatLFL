@@ -47,8 +47,6 @@ public class ThreadForSerialize implements Runnable {
         } catch (SQLException e) {
             System.out.println("Ошибка БД! выполнение потока " + obj.getClass().getSimpleName() + " остановлено");
             loggingError(e);
-        } finally {
-            DatabaseManager.closeConnection();
         }
 
         logger.trace("Thread successfully end/" + obj.getClass().getSimpleName());

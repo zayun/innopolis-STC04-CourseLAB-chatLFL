@@ -18,7 +18,10 @@ public class Main {
     public static void main(String[] args){
 
 //        SerializeAllTables.go();
-        DeserializeAllTables.go();
-        if (DatabaseManager.getConnection()!=null) DatabaseManager.closeConnection();
+//        DeserializeAllTables.go();
+        
+        if (DatabaseManager.getConnection()!=null) {
+            DatabaseManager.closeConnection();
+        }
     }
 }

@@ -64,15 +64,22 @@ public class MessageList extends AbstractEntityList<Message> {
     }
 
     public String getSqlText(String type) {
+
+        String sqlText="";
+
         if (type.equals("insert")) {
-            String sqlText = "INSERT INTO \"Main\".\"r_Messages\"(\n" +
+
+            sqlText = "INSERT INTO \"Main\".\"r_Messages\"(\n" +
                     "\tid, \"FromUserID\", \"ToUserID\", " +
                     "\"BodyText\", \"isRead\", \"DateTime\", \"chatroom\")\n" +
                     "\tVALUES (?, ?, ?, ?, ?, ?, ?);";
             return sqlText;
+
         } else if (type.equals("select")) {
-            String sqlText = "select * from \"Main\".\"r_Messages\"";
+
+            sqlText = "select * from \"Main\".\"r_Messages\"";
             return sqlText;
-        } else return "";
+
+        } else return sqlText;
     }
 }

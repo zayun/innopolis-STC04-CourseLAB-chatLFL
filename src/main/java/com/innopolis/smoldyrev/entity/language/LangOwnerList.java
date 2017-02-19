@@ -60,14 +60,21 @@ public class LangOwnerList extends AbstractEntityList<LangOwner> {
     }
 
     public String getSqlText(String type) {
+
+        String sqlText="";
+
         if (type.equals("insert")) {
-            String sqlText = "INSERT INTO \"Main\".\"r_LangOwner\"(\n" +
+
+            sqlText = "INSERT INTO \"Main\".\"r_LangOwner\"(\n" +
                     "\t\"idPerson\", \"idLang\", level)\n" +
                     "\tVALUES (?, ?, ?);";
             return sqlText;
+
         } else if (type.equals("select")) {
-            String sqlText = "select * from \"Main\".\"r_LangOwner\"";
+
+            sqlText = "select * from \"Main\".\"r_LangOwner\"";
             return sqlText;
-        } else return "";
+
+        } else return sqlText;
     }
 }

@@ -59,14 +59,21 @@ public class LanguageList extends AbstractEntityList<Language> {
     }
 
     public String getSqlText(String type) {
+
+        String sqlText="";
+
         if (type.equals("insert")) {
-            String sqlText = "INSERT INTO \"Main\".\"d_Languages\"(\n" +
+
+            sqlText = "INSERT INTO \"Main\".\"d_Languages\"(\n" +
                     "\t\"ShortName\", \"FullName\", dialekt)\n" +
                     "\tVALUES (?, ?, ?);";
             return sqlText;
+
         } else if (type.equals("select")) {
-            String sqlText = "select * from \"Main\".\"d_Languages\"";
+
+            sqlText = "select * from \"Main\".\"d_Languages\"";
             return sqlText;
-        } else return "";
+
+        } else return sqlText;
     }
 }

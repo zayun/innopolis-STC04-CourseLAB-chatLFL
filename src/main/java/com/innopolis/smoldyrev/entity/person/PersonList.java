@@ -68,15 +68,22 @@ public class PersonList extends AbstractEntityList<Person> {
     }
 
     public String getSqlText(String type) {
+
+        String sqlText="";
+
         if (type.equals("insert")) {
-            String sqlText = "INSERT INTO \"Main\".\"d_Persons\"(\n" +
+
+            sqlText = "INSERT INTO \"Main\".\"d_Persons\"(\n" +
                     "\t\"personID\", \"FirstName\", \"LastName\", " +
                     "\"birthDay\", email, \"phoneNumber\", male)\n" +
                     "\tVALUES (?, ?, ?, ?, ?, ?, ?);";
             return sqlText;
+
         } else if (type.equals("select")) {
-            String sqlText = "select * from \"Main\".\"d_Persons\"";
+
+            sqlText = "select * from \"Main\".\"d_Persons\"";
             return sqlText;
-        } else return "";
+
+        } else return sqlText;
     }
 }

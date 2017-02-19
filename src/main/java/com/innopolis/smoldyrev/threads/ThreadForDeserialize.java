@@ -64,9 +64,8 @@ public class ThreadForDeserialize implements Runnable {
             System.out.println("Ошибка БД! выполнение потока " + obj.getClass().getSimpleName() + " остановлено");
         } catch (NoDataException e) {
             loggingError(e);
-        } finally {
-            DatabaseManager.closeConnection();
         }
+
         logger.trace("Thread successfully end/" + obj.getClass().getSimpleName());
     }
 

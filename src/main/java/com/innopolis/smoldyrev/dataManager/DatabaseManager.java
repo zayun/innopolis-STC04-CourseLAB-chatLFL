@@ -74,7 +74,7 @@ public class DatabaseManager {
      * @return stmt
      * @throws SQLException - невозможно получить connection
      * */
-    public Statement getStatement() throws SQLException {
+    public static synchronized Statement getStatement() throws SQLException {
 
         if (connection != null) {
             Statement stmt = connection.createStatement();
@@ -93,7 +93,7 @@ public class DatabaseManager {
      * @return pstmt
      * @throws SQLException - невозможно получить connection
      * */
-    public PreparedStatement getPrepearedStatement(String sqlText) throws SQLException {
+    public static synchronized PreparedStatement getPrepearedStatement(String sqlText) throws SQLException {
         if (connection != null) {
             PreparedStatement pstmt = connection.prepareStatement(sqlText);
             return pstmt;

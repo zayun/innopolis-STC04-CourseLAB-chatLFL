@@ -103,9 +103,9 @@ public abstract class AbstractEntityList<T> implements LFLChatLoadable {
      * */
     public synchronized void loadFromDB() throws SQLException {
         if (isDownloaded()) listEntities = null;
-        DatabaseManager dbm = new DatabaseManager();
+//        DatabaseManager dbm = new DatabaseManager();
 
-        Statement stmt = dbm.getStatement();
+        Statement stmt = DatabaseManager.getStatement();
         ResultSet rs = stmt.executeQuery(getSqlText("select"));
         while (rs.next()) {
             listEntities.add(getEntity(rs));
@@ -124,8 +124,8 @@ public abstract class AbstractEntityList<T> implements LFLChatLoadable {
      * */
     public synchronized void uploadToDB() throws SQLException, NoDataException {
         if (listEntities != null && listEntities.size() != 0) {
-            DatabaseManager dbm = new DatabaseManager();
-            PreparedStatement pstmt = dbm.getPrepearedStatement(getSqlText("insert"));
+//            DatabaseManager dbm = new DatabaseManager();
+            PreparedStatement pstmt = DatabaseManager.getPrepearedStatement(getSqlText("insert"));
             try {
 
                 for (T entity :
