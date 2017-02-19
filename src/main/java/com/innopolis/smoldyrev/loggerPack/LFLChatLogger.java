@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 
 /**
  * Created by smoldyrev on 19.02.17.
+ * Спросить на консультациимвыводить ли логгер
+ * в отдельный статик класс??? (тогда делать getLogger() synch?)
  */
 @Deprecated
 public class LFLChatLogger {

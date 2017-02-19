@@ -1,5 +1,6 @@
 package com.innopolis.smoldyrev;
 
+import com.innopolis.smoldyrev.dataManager.DatabaseManager;
 import com.innopolis.smoldyrev.entity.language.LangOwnerList;
 import com.innopolis.smoldyrev.entity.language.LanguageList;
 import com.innopolis.smoldyrev.entity.message.MessageList;
@@ -18,6 +19,6 @@ public class Main {
 
 //        SerializeAllTables.go();
         DeserializeAllTables.go();
-
+        if (DatabaseManager.getConnection()!=null) DatabaseManager.closeConnection();
     }
 }

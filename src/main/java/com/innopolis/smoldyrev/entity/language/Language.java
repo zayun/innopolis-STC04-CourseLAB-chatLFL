@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by smoldyrev on 16.02.17.
+ * Класс сущности, хранимой в таблице d_Languages
+ * реализованы геттеры и сеттеры всех полей
  */
 @XmlType(propOrder={"shortName","fullName","dialekt"})
 @XmlRootElement
@@ -16,6 +18,9 @@ public class Language {
     private String fullName;
     private String dialekt;
 
+    /**Дефолтный конструктор
+     * требуется для JAXB
+     * */
     public Language() {
     }
 

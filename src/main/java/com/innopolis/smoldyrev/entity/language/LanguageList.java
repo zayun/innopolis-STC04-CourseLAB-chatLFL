@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.sql.*;
 import java.util.List;
 
+
 @XmlType
 @XmlRootElement(name = "Group")
 public class LanguageList extends AbstractEntityList<Language> {

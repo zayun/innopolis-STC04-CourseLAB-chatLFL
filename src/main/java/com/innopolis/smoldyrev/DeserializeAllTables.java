@@ -8,6 +8,10 @@ import com.innopolis.smoldyrev.entity.person.PersonList;
 import com.innopolis.smoldyrev.entity.user.UserList;
 import com.innopolis.smoldyrev.threads.ThreadForDeserialize;
 
+/**
+ * <p>Запуск потоков для десериализации в одном месте </p>
+ * просто чтобы не засорять мэйн
+ */
 public class DeserializeAllTables {
 
     public static void go() {

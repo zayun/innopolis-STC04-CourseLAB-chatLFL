@@ -8,8 +8,12 @@ import com.innopolis.smoldyrev.entity.person.PersonList;
 import com.innopolis.smoldyrev.entity.user.UserList;
 import com.innopolis.smoldyrev.threads.ThreadForSerialize;
 
-
+/**
+ * <p>Запуск потоков для сериализации в одном месте </p>
+ * просто чтобы не засорять мэйн
+ */
 public class SerializeAllTables {
+
 
     public static void go() {
 
@@ -40,9 +44,8 @@ public class SerializeAllTables {
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
             System.out.println("Ошибка выполнения потока");
+        }finally {
+            DatabaseManager.closeConnection();
         }
-
-        DatabaseManager.closeConnection();
-
     }
 }

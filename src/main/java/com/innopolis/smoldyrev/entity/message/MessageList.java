@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.sql.*;
 import java.util.List;
 
+
 @XmlType
 @XmlRootElement
 public class MessageList extends AbstractEntityList<Message> {

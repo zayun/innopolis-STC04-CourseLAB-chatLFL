@@ -5,6 +5,8 @@ import java.util.Date;
 
 /**
  * Created by smoldyrev on 16.02.17.
+ * Класс сущности, хранимой в таблице d_Persones
+ * реализованы геттеры и сеттеры всех полей
  */
 @XmlType(propOrder={"firstName","lastName","male","birthDay","email","phoneNumber"})
 @XmlRootElement
@@ -18,6 +20,9 @@ public class Person {
     private boolean male;
     private Date birthDay;
 
+    /**Дефолтный конструктор
+     * требуется для JAXB
+     * */
     public Person() {
 
     }

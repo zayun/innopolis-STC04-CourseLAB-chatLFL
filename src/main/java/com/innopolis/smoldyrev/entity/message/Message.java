@@ -10,7 +10,9 @@ import java.util.Date;
 
 
 /**
- * Created by smoldyrev on 17.02.17.
+ * Created by smoldyrev on 16.02.17.
+ * Класс сущности, хранимой в таблице r_Messages
+ * реализованы геттеры и сеттеры всех полей
  */
 @XmlType(propOrder = {"date", "fromUser", "toUser", "bodyText", "viewed","chatRoom"})
 @XmlRootElement
@@ -24,6 +26,9 @@ public class Message {
     private boolean viewed;
     private int chatRoom;
 
+    /**Дефолтный конструктор
+     * требуется для JAXB
+     * */
     public Message() {
     }
 

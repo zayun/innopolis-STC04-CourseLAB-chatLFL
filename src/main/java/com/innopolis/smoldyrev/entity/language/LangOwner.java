@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Created by smoldyrev on 17.02.17.
+ * Created by smoldyrev on 16.02.17.
+ * Класс сущности, хранимой в таблице r_LangOwners
+ * реализованы геттеры и сеттеры всех полей
  */
 @XmlType(propOrder={"person","language","level"})
 @XmlRootElement
@@ -17,6 +19,9 @@ public class LangOwner {
     private Language language;
     private int level;
 
+    /**Дефолтный конструктор
+     * требуется для JAXB
+     * */
     public LangOwner() {
     }
 

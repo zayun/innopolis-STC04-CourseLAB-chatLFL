@@ -1,6 +1,5 @@
 package com.innopolis.smoldyrev.dataManager;
 
-import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import org.apache.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -11,11 +10,17 @@ import java.io.File;
 
 /**
  * Created by smoldyrev on 16.02.17.
+ * Класс работы по marshalling/unmarshalling
  */
 public class FileManager {
 
     private static Logger logger = Logger.getLogger(FileManager.class);
 
+    /**Сохраняет полученный объект
+     * технология jaxb
+     * @param obj - любой объект
+     * @param filePath - в указанный путь
+     * */
     public static void saveToFile(Object obj, String filePath) {
         File file = new File(filePath);
         try {
@@ -30,6 +35,13 @@ public class FileManager {
         }
     }
 
+    /**Загружает сериализованный в xml объект
+     * в object
+     * @param c - класс загружаемогообъекта
+     * @param filePath - путь к xml
+     * @return object - ссылка на десериализоованный объект
+     * @throws JAXBException - при ошибке десериализации
+     * */
     public static Object getObject(Class c, String filePath) throws JAXBException {
         File file = new File(filePath);
         JAXBContext context = JAXBContext.newInstance(c);

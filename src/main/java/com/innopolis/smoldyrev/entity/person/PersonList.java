@@ -10,9 +10,7 @@ import java.sql.Date;
 import java.util.*;
 
 
-/**
- * Created by smoldyrev on 16.02.17.
- */
+
 
 @XmlType(propOrder = {"persons" }, name = "group")
 @XmlRootElement

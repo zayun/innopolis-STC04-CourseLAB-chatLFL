@@ -10,6 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by smoldyrev on 16.02.17.
+ * Класс сущности, хранимой в таблице d_Users
+ * реализованы геттеры и сеттеры всех полей
  */
 @XmlType(propOrder={"userType","login","passwd","person","blocked"})
 @XmlRootElement
@@ -22,6 +24,9 @@ public class User {
     private Person person;
     private boolean blocked;
 
+    /**Дефолтный конструктор
+     * требуется для JAXB
+     * */
     public User() {
     }
 
@@ -43,7 +48,6 @@ public class User {
     public void setUserID(Integer userID) {
         this.userID = userID;
     }
-
 
     @XmlElement
     public boolean isBlocked() {

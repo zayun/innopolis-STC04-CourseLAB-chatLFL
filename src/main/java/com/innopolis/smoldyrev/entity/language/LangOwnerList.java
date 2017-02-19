@@ -12,6 +12,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+
 @XmlType
 @XmlRootElement(name = "Group")
 public class LangOwnerList extends AbstractEntityList<LangOwner> {

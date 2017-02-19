@@ -6,6 +6,7 @@ import java.sql.*;
 
 /**
  * Created by smoldyrev on 16.02.17.
+ * Класс для работы с БД
  */
 public class DatabaseManager {
 
@@ -13,6 +14,12 @@ public class DatabaseManager {
 
     private static Connection connection;
 
+    /**Инициализация подключения к БД
+     * устанавливает
+     * @see DatabaseManager#connection
+     * @throws ClassNotFoundException - при не загруженном драйвере
+     * @throws SQLException - при ошибке подключения к БД
+     * */
     public static void initDatabase(String login, String password) {
 
         try {
@@ -31,10 +38,42 @@ public class DatabaseManager {
         }
     }
 
+    /**Инициализация подключения к БД
+     * при не указанных параметрах запускает
+     * @see DatabaseManager#initDatabase(String, String) с параметрами по умолчанию
+     * @throws ClassNotFoundException - при не загруженном драйвере
+     * @throws SQLException - при ошибке подключения к БД
+     * */
     public static void initDatabase() {
         initDatabase("postgres", "123456");
     }
 
+    /**Возвращает подключение к БД
+     * @return connection
+     */
+    public static Connection getConnection() {
+        return connection;
+    }
+
+    /**Закрывает подключение к БД
+     */
+    public static void closeConnection() {
+        try {
+            if (connection != null)
+                connection.close();
+            logger.trace("Connection was closed");
+        } catch (SQLException e) {
+            logger.error(e);
+            System.out.println("Невозможно закрыть соединение!");
+        }
+    }
+
+    /**Возвращает statement текущего подключения
+     * не static потому что будут конфликты в потоках
+     * спросить на консультации про это
+     * @return stmt
+     * @throws SQLException - невозможно получить connection
+     * */
     public Statement getStatement() throws SQLException {
 
         if (connection != null) {
@@ -47,6 +86,13 @@ public class DatabaseManager {
 
     }
 
+    /**Возвращает preparedStatement текущего подключения
+     * не static потому что будут конфликты в потоках
+     * спросить на консультации про это
+     * @param sqlText - текст запроса
+     * @return pstmt
+     * @throws SQLException - невозможно получить connection
+     * */
     public PreparedStatement getPrepearedStatement(String sqlText) throws SQLException {
         if (connection != null) {
             PreparedStatement pstmt = connection.prepareStatement(sqlText);
@@ -56,20 +102,4 @@ public class DatabaseManager {
             throw new SQLException("Соединение не создано!");
         }
     }
-
-    public static Connection getConnection() {
-        return connection;
-    }
-
-    public static void closeConnection() {
-        try {
-            if (connection != null)
-                connection.close();
-            logger.trace("Connection was closed");
-        } catch (SQLException e) {
-            logger.error(e);
-            System.out.println("Невозможно закрыть соединение!");
-        }
-    }
-
 }

@@ -1,6 +1,7 @@
 package com.innopolis.smoldyrev.threads;
 
 import com.innopolis.smoldyrev.Main;
+import com.innopolis.smoldyrev.dataManager.DatabaseManager;
 import com.innopolis.smoldyrev.entity.AbstractEntityList;
 import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.FileManager;
@@ -9,6 +10,7 @@ import com.innopolis.smoldyrev.entity.message.MessageList;
 import com.innopolis.smoldyrev.entity.user.UserList;
 import org.apache.log4j.Logger;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 
 public class ThreadForSerialize implements Runnable {
@@ -25,6 +27,10 @@ public class ThreadForSerialize implements Runnable {
         this.filePath = filePath;
     }
 
+    /**Поток выполнения
+     * Сначала загружает данные из БД в объекты программы
+     * затем сериализует их в файл filePath
+     */
     @Override
     public void run() {
         try {
@@ -41,11 +47,21 @@ public class ThreadForSerialize implements Runnable {
         } catch (SQLException e) {
             System.out.println("Ошибка БД! выполнение потока " + obj.getClass().getSimpleName() + " остановлено");
             loggingError(e);
+        } finally {
+            DatabaseManager.closeConnection();
         }
 
         logger.trace("Thread successfully end/" + obj.getClass().getSimpleName());
     }
 
+    /**
+     * Проверка очередности загрузки таблиц в порограмму
+     * если связанные таблицы не загружены к моменту
+     * прохода, то поток уходит в ожидание
+     * до загрузки связанных таблиц или ошибки
+     * @param objClass - класс проверяемогообъекта
+     * @throws InterruptedException
+     */
     private void checkLinkedTables(Class objClass) throws InterruptedException {
 
         if (objClass.equals(UserList.class)) {
@@ -72,6 +88,15 @@ public class ThreadForSerialize implements Runnable {
             }
         }
     }
+
+    /**
+     * логирует ошибку
+     * уведомляет пользователя в консоль об ошибке
+     * устанавливает флаг
+     * @see ThreadForDeserialize#error в true для остановки потоков
+     * уведомляет ожидающие потоки об ошибке
+     * @param e - логируемый Exception
+     */
     private void loggingError(Exception e) {
         error = true;
         logger.error(e);
