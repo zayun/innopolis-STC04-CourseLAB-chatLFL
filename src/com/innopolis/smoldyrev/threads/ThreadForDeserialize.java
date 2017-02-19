@@ -1,3 +1,4 @@
+/*
 package com.innopolis.smoldyrev.threads;
 
 import com.innopolis.smoldyrev.dataManager.FileManager;
@@ -12,9 +13,11 @@ import com.innopolis.smoldyrev.exception.NoDataException;
 import javax.xml.bind.JAXBException;
 import java.sql.SQLException;
 
+*/
 /**
  * Created by smoldyrev on 18.02.17.
- */
+ *//*
+
 public class ThreadForDeserialize implements Runnable {
 
     private LFLChatLoadable obj;
@@ -91,3 +94,4 @@ public class ThreadForDeserialize implements Runnable {
 
 
 }
+*/

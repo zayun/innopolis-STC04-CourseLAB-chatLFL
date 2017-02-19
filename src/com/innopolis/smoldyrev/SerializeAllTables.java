@@ -1,3 +1,4 @@
+/*
 package com.innopolis.smoldyrev;
 
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
@@ -8,9 +9,11 @@ import com.innopolis.smoldyrev.entity.person.PersonList;
 import com.innopolis.smoldyrev.entity.user.UserList;
 import com.innopolis.smoldyrev.threads.ThreadForSerialize;
 
+*/
 /**
  * Created by smoldyrev on 18.02.17.
- */
+ *//*
+
 public class SerializeAllTables {
 
     public static void go() {
@@ -50,3 +53,4 @@ public class SerializeAllTables {
 
     }
 }
+*/

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Group>
     <users id="7">
+        <userType>user</userType>
         <login>login1</login>
         <passwd>123456</passwd>
         <person id="1">
@@ -14,6 +15,7 @@
         <blocked>false</blocked>
     </users>
     <users id="8">
+        <userType>user</userType>
         <login>login2</login>
         <passwd>654321</passwd>
         <person id="2">
@@ -27,6 +29,7 @@
         <blocked>false</blocked>
     </users>
     <users id="9">
+        <userType>user</userType>
         <login>login3</login>
         <passwd>11111111</passwd>
         <person id="3">

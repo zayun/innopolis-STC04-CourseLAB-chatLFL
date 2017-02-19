@@ -12,35 +12,38 @@ import java.util.Date;
 /**
  * Created by smoldyrev on 17.02.17.
  */
-@XmlType(propOrder = {"date", "fromUser", "toUser", "bodyText", "viewed"})
+@XmlType(propOrder = {"date", "fromUser", "toUser", "bodyText", "viewed","chatRoom"})
 @XmlRootElement
 public class Message {
 
-    private Integer id;
+    private int id;
     private Date date;
     private User fromUser;
     private User toUser;
     private String bodyText;
     private boolean viewed;
+    private int chatRoom;
 
     public Message() {
     }
 
-    public Message(Integer id, Date date, User fromUser, User toUser, String bodyText, boolean viewed) {
+    public Message(int id, Date date, User fromUser, User toUser,
+                   String bodyText, boolean viewed, int chatRoom) {
         this.id = id;
         this.date = date;
         this.fromUser = fromUser;
         this.toUser = toUser;
         this.bodyText = bodyText;
         this.viewed = viewed;
+        this.chatRoom = chatRoom;
     }
 
     @XmlAttribute(name = "identity")
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -87,5 +90,14 @@ public class Message {
 
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
+    }
+
+    public int getChatRoom() {
+        return chatRoom;
+    }
+
+    @XmlElement
+    public void setChatRoom(int chatRoom) {
+        this.chatRoom = chatRoom;
     }
 }

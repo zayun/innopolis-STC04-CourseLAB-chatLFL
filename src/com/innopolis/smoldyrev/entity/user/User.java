@@ -11,11 +11,12 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * Created by smoldyrev on 16.02.17.
  */
-@XmlType(propOrder={"login","passwd","person","blocked"})
+@XmlType(propOrder={"userType","login","passwd","person","blocked"})
 @XmlRootElement
 public class User {
 
     private Integer userID;
+    private String userType;
     private String login;
     private String passwd;
     private Person person;
@@ -24,13 +25,25 @@ public class User {
     public User() {
     }
 
-    public User(Integer userID, String login, String passwd, Person person, boolean blocked) {
+    public User(Integer userID, String userType,String login, String passwd, Person person, boolean blocked) {
         this.userID = userID;
+        this.userType = userType;
         this.login = login;
         this.passwd = passwd;
         this.person = person;
         this.blocked = blocked;
     }
+
+
+    @XmlAttribute(name = "id")
+    public Integer getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
+
 
     @XmlElement
     public boolean isBlocked() {
@@ -41,13 +54,13 @@ public class User {
         this.blocked = blocked;
     }
 
-    @XmlAttribute(name = "id")
-    public Integer getUserID() {
-        return userID;
+    @XmlElement
+    public String getUserType() {
+        return userType;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     @XmlElement

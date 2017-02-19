@@ -1,3 +1,4 @@
+/*
 package com.innopolis.smoldyrev.threads;
 
 import com.innopolis.smoldyrev.entity.LFLChatLoadable;
@@ -10,9 +11,11 @@ import com.innopolis.smoldyrev.entity.user.UserList;
 
 import java.sql.SQLException;
 
+*/
 /**
  * Created by smoldyrev on 17.02.17.
- */
+ *//*
+
 public class ThreadForSerialize implements Runnable {
 
     private LFLChatLoadable obj;
@@ -89,3 +92,4 @@ public class ThreadForSerialize implements Runnable {
         }
     }
 }
+*/
