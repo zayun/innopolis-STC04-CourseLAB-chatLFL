@@ -69,7 +69,7 @@ public abstract class AbstractEntityList<T> implements LFLChatLoadable {
     }
 
     public void uploadToDB() throws SQLException, NoDataException {
-        if (listEntities != null && listEntities.size() == 0) {
+        if (listEntities != null && listEntities.size() != 0) {
             DatabaseManager dbm = new DatabaseManager();
             PreparedStatement pstmt = dbm.getPrepearedStatement(getSqlText("insert"));
             try {
@@ -82,7 +82,9 @@ public abstract class AbstractEntityList<T> implements LFLChatLoadable {
             } finally {
                 pstmt.close();
             }
-        } else throw new NoDataException("Отсутствуют данные для загрузки");
+        } else {
+            throw new NoDataException("Нет данных для загрузки");
+        }
     }
 
     public abstract String getSqlText(String type);

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<messageList>
+    <messages identity="2">
+        <date>2017-02-17T18:54:49.393+03:00</date>
+        <fromUser id="7">
+            <userType>user</userType>
+            <login>login1</login>
+            <passwd>123456</passwd>
+            <person id="1">
+                <firstName>Smoldyrev</firstName>
+                <lastName>Egor</lastName>
+                <male>true</male>
+                <birthDay>1986-09-23T00:00:00+04:00</birthDay>
+                <email>eee@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </fromUser>
+        <toUser id="8">
+            <userType>user</userType>
+            <login>login2</login>
+            <passwd>654321</passwd>
+            <person id="2">
+                <firstName>Smoldyreva</firstName>
+                <lastName>Elena</lastName>
+                <male>false</male>
+                <birthDay>1986-02-11T00:00:00+03:00</birthDay>
+                <email>eaaa@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </toUser>
+        <bodyText>Привет</bodyText>
+        <viewed>true</viewed>
+        <chatRoom>0</chatRoom>
+    </messages>
+    <messages identity="3">
+        <date>2017-02-17T18:54:59.110+03:00</date>
+        <fromUser id="8">
+            <userType>user</userType>
+            <login>login2</login>
+            <passwd>654321</passwd>
+            <person id="2">
+                <firstName>Smoldyreva</firstName>
+                <lastName>Elena</lastName>
+                <male>false</male>
+                <birthDay>1986-02-11T00:00:00+03:00</birthDay>
+                <email>eaaa@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </fromUser>
+        <toUser id="7">
+            <userType>user</userType>
+            <login>login1</login>
+            <passwd>123456</passwd>
+            <person id="1">
+                <firstName>Smoldyrev</firstName>
+                <lastName>Egor</lastName>
+                <male>true</male>
+                <birthDay>1986-09-23T00:00:00+04:00</birthDay>
+                <email>eee@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </toUser>
+        <bodyText>Hi</bodyText>
+        <viewed>true</viewed>
+        <chatRoom>0</chatRoom>
+    </messages>
+    <messages identity="4">
+        <date>2017-02-17T18:55:04.124+03:00</date>
+        <fromUser id="7">
+            <userType>user</userType>
+            <login>login1</login>
+            <passwd>123456</passwd>
+            <person id="1">
+                <firstName>Smoldyrev</firstName>
+                <lastName>Egor</lastName>
+                <male>true</male>
+                <birthDay>1986-09-23T00:00:00+04:00</birthDay>
+                <email>eee@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </fromUser>
+        <toUser id="8">
+            <userType>user</userType>
+            <login>login2</login>
+            <passwd>654321</passwd>
+            <person id="2">
+                <firstName>Smoldyreva</firstName>
+                <lastName>Elena</lastName>
+                <male>false</male>
+                <birthDay>1986-02-11T00:00:00+03:00</birthDay>
+                <email>eaaa@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </toUser>
+        <bodyText>Как дела?</bodyText>
+        <viewed>true</viewed>
+        <chatRoom>0</chatRoom>
+    </messages>
+    <messages identity="5">
+        <date>2017-02-17T18:55:07.281+03:00</date>
+        <fromUser id="8">
+            <userType>user</userType>
+            <login>login2</login>
+            <passwd>654321</passwd>
+            <person id="2">
+                <firstName>Smoldyreva</firstName>
+                <lastName>Elena</lastName>
+                <male>false</male>
+                <birthDay>1986-02-11T00:00:00+03:00</birthDay>
+                <email>eaaa@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </fromUser>
+        <toUser id="7">
+            <userType>user</userType>
+            <login>login1</login>
+            <passwd>123456</passwd>
+            <person id="1">
+                <firstName>Smoldyrev</firstName>
+                <lastName>Egor</lastName>
+                <male>true</male>
+                <birthDay>1986-09-23T00:00:00+04:00</birthDay>
+                <email>eee@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </toUser>
+        <bodyText>I am fine,thnx.and u?</bodyText>
+        <viewed>true</viewed>
+        <chatRoom>0</chatRoom>
+    </messages>
+    <messages identity="6">
+        <date>2017-02-17T18:55:13.026+03:00</date>
+        <fromUser id="7">
+            <userType>user</userType>
+            <login>login1</login>
+            <passwd>123456</passwd>
+            <person id="1">
+                <firstName>Smoldyrev</firstName>
+                <lastName>Egor</lastName>
+                <male>true</male>
+                <birthDay>1986-09-23T00:00:00+04:00</birthDay>
+                <email>eee@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </fromUser>
+        <toUser id="8">
+            <userType>user</userType>
+            <login>login2</login>
+            <passwd>654321</passwd>
+            <person id="2">
+                <firstName>Smoldyreva</firstName>
+                <lastName>Elena</lastName>
+                <male>false</male>
+                <birthDay>1986-02-11T00:00:00+03:00</birthDay>
+                <email>eaaa@gmail.com</email>
+                <phoneNumber>+791299999</phoneNumber>
+            </person>
+            <blocked>false</blocked>
+        </toUser>
+        <bodyText>У меня тоже все хорошо</bodyText>
+        <viewed>true</viewed>
+        <chatRoom>0</chatRoom>
+    </messages>
+</messageList>
