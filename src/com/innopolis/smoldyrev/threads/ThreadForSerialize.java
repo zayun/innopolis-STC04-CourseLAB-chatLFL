@@ -1,28 +1,19 @@
-/*
 package com.innopolis.smoldyrev.threads;
 
+import com.innopolis.smoldyrev.Main;
 import com.innopolis.smoldyrev.entity.LFLChatLoadable;
 import com.innopolis.smoldyrev.dataManager.FileManager;
 import com.innopolis.smoldyrev.entity.language.LangOwnerList;
-import com.innopolis.smoldyrev.entity.language.LanguageList;
 import com.innopolis.smoldyrev.entity.message.MessageList;
-import com.innopolis.smoldyrev.entity.person.PersonList;
 import com.innopolis.smoldyrev.entity.user.UserList;
 
 import java.sql.SQLException;
-
-*/
-/**
- * Created by smoldyrev on 17.02.17.
- *//*
 
 public class ThreadForSerialize implements Runnable {
 
     private LFLChatLoadable obj;
     private String filePath;
-    private static boolean pack = false;
     private static final Object lock = new Object();
-
 
     public ThreadForSerialize(LFLChatLoadable obj, String filePath) {
 
@@ -30,18 +21,9 @@ public class ThreadForSerialize implements Runnable {
         this.filePath = filePath;
     }
 
-    public static boolean isPack() {
-        return pack;
-    }
-
-    public static void setPack(boolean pack) {
-        ThreadForSerialize.pack = pack;
-    }
-
     @Override
     public void run() {
-        if (pack) checkLinkedTables(obj.getClass());
-
+        checkLinkedTables(obj.getClass());
 
         try {
             obj.loadFromDB();
@@ -56,11 +38,11 @@ public class ThreadForSerialize implements Runnable {
         }
     }
 
-    public void checkLinkedTables(Class objClass) {
+    private void checkLinkedTables(Class objClass) {
 
         if (objClass.equals(UserList.class)) {
             synchronized (lock) {
-                while (!PersonList.isDownloaded()) {
+                while (!Main.persones.isDownloaded()) {
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
@@ -70,8 +52,8 @@ public class ThreadForSerialize implements Runnable {
             }
         } else if (objClass.equals(LangOwnerList.class)) {
             synchronized (lock) {
-                while (!LanguageList.isDownloaded() ||
-                        !PersonList.isDownloaded()) {
+                while (!Main.languages.isDownloaded()||
+                        !Main.persones.isDownloaded()) {
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
@@ -81,7 +63,7 @@ public class ThreadForSerialize implements Runnable {
             }
         } else if (objClass.equals(MessageList.class)) {
             synchronized (lock) {
-                while (!UserList.isDownloaded()) {
+                while (!Main.users.isDownloaded()) {
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
@@ -92,4 +74,3 @@ public class ThreadForSerialize implements Runnable {
         }
     }
 }
-*/

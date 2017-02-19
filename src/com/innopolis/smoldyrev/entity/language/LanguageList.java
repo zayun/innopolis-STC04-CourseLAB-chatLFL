@@ -52,6 +52,11 @@ public class LanguageList extends AbstractEntityList<Language> {
         pstmt.executeUpdate();
     }
 
+    @Override
+    protected String getTableName() {
+        return "d_Languages";
+    }
+
     public String getSqlText(String type) {
         if (type.equals("insert")) {
             String sqlText = "INSERT INTO \"Main\".\"d_Languages\"(\n" +

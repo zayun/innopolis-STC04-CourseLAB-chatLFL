@@ -24,7 +24,7 @@ public class UserList extends AbstractEntityList<User> {
     }
 
     public void setUsers(List<User> users) {
-        this.users = users;
+        super.setEntityList(users);
     }
 
     public User getEntityOnID(String id) {
@@ -58,6 +58,11 @@ public class UserList extends AbstractEntityList<User> {
         pstmt.setString(3, user.getPasswd());
         pstmt.setInt(4, user.getPerson().getId());
         pstmt.executeUpdate();
+    }
+
+    @Override
+    protected String getTableName() {
+        return "d_Users";
     }
 
     public String getSqlText(String type) {

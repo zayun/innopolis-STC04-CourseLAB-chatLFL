@@ -24,7 +24,7 @@ public class LangOwnerList extends AbstractEntityList<LangOwner> {
     }
 
     public void setLangOwners(List<LangOwner> langOwners) {
-        this.langOwners = langOwners;
+        super.setEntityList(langOwners);
     }
 
     public LangOwner getEntityOnID(String id) {
@@ -51,6 +51,11 @@ public class LangOwnerList extends AbstractEntityList<LangOwner> {
         pstmt.setInt(3, langOwner.getLevel());
         pstmt.executeUpdate();
 
+    }
+
+    @Override
+    protected String getTableName() {
+        return "r_LangOwner";
     }
 
     public String getSqlText(String type) {

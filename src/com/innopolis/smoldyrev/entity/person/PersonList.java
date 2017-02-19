@@ -64,6 +64,11 @@ public class PersonList extends AbstractEntityList<Person> {
         pstmt.executeUpdate();
     }
 
+    @Override
+    protected String getTableName() {
+        return "d_Persons";
+    }
+
     public String getSqlText(String type) {
         if (type.equals("insert")) {
             String sqlText = "INSERT INTO \"Main\".\"d_Persons\"(\n" +

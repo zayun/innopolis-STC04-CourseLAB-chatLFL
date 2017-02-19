@@ -1,4 +1,3 @@
-/*
 package com.innopolis.smoldyrev;
 
 import com.innopolis.smoldyrev.dataManager.DatabaseManager;
@@ -9,25 +8,18 @@ import com.innopolis.smoldyrev.entity.person.PersonList;
 import com.innopolis.smoldyrev.entity.user.UserList;
 import com.innopolis.smoldyrev.threads.ThreadForSerialize;
 
-*/
-/**
- * Created by smoldyrev on 18.02.17.
- *//*
 
 public class SerializeAllTables {
 
     public static void go() {
 
-
         DatabaseManager.initDatabase();
 
-        PersonList personList = new PersonList();
-        LanguageList languageList = new LanguageList();
-        UserList userList = new UserList();
-        LangOwnerList langOwnerList = new LangOwnerList();
-        MessageList messageList = new MessageList();
-
-        ThreadForSerialize.setPack(true);
+        PersonList personList = Main.persones;
+        LanguageList languageList = Main.languages;
+        UserList userList = Main.users;
+        LangOwnerList langOwnerList = Main.langOwners;
+        MessageList messageList = Main.messageList;
 
         Thread t1 = new Thread(new ThreadForSerialize(personList, "temp/persones.xml"));
         Thread t2 = new Thread(new ThreadForSerialize(languageList, "temp/languages.xml"));
@@ -53,4 +45,3 @@ public class SerializeAllTables {
 
     }
 }
-*/

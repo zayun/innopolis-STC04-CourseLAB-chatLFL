@@ -22,7 +22,7 @@ public class MessageList extends AbstractEntityList<Message> {
     }
 
     public void setMessages(List<Message> messages) {
-        this.messages = messages;
+        super.setEntityList(messages);
     }
 
     public Message getEntityOnID(String id) {
@@ -55,6 +55,11 @@ public class MessageList extends AbstractEntityList<Message> {
 
         pstmt.executeUpdate();
 
+    }
+
+    @Override
+    protected String getTableName() {
+        return "r_Messages";
     }
 
     public String getSqlText(String type) {

@@ -1,5 +1,8 @@
 package com.innopolis.smoldyrev.dataManager;
 
+import com.innopolis.smoldyrev.entity.AbstractEntityList;
+import org.apache.log4j.Logger;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -11,6 +14,8 @@ import java.io.File;
  */
 public class FileManager {
 
+    private static Logger logger = Logger.getLogger(FileManager.class);
+
     public static void saveToFile(Object obj, String filePath) {
         File file = new File(filePath);
         try {
@@ -18,9 +23,10 @@ public class FileManager {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(obj, file);
-            //jaxbMarshaller.marshal(obj, System.out);
+            logger.trace(obj.getClass() + " was serialized to " + filePath);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -29,7 +35,7 @@ public class FileManager {
         JAXBContext context = JAXBContext.newInstance(c);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         Object object = unmarshaller.unmarshal(file);
-
+        logger.trace("Object was serialized from " + filePath);
         return object;
     }
 }
