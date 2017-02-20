@@ -1,6 +1,9 @@
 package com.innopolis.smoldyrev.entity.person;
 
+import com.innopolis.smoldyrev.entity.language.Language;
+
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -101,4 +104,5 @@ public class Person {
     public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
     }
+
 }

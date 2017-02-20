@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -50,7 +51,8 @@ public class LangOwnerList extends AbstractEntityList<LangOwner> {
         pstmt.setInt(1, langOwner.getPerson().getId());
         pstmt.setString(2, langOwner.getLanguage().getShortName());
         pstmt.setInt(3, langOwner.getLevel());
-        pstmt.executeUpdate();
+        pstmt.addBatch();
+//        pstmt.executeUpdate();
 
     }
 

@@ -54,7 +54,8 @@ public class MessageList extends AbstractEntityList<Message> {
         pstmt.setTimestamp(6, new Timestamp(message.getDate().getTime()));
         pstmt.setInt(7, message.getChatRoom());
 
-        pstmt.executeUpdate();
+        pstmt.addBatch();
+//        pstmt.executeUpdate();
 
     }
 

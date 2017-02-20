@@ -42,13 +42,16 @@ public class UserList extends AbstractEntityList<User> {
     }
 
     protected User getEntity(ResultSet rs) throws SQLException {
-        User user = new User(
-                rs.getInt("userID"), rs.getString("userType"),
-                rs.getString("login"), rs.getString("pwd"),
-                Main.persones.getEntityOnID(rs.getInt("personID")),
-                rs.getBoolean("blocked"));
+        Person person = Main.persones.getEntityOnID(rs.getInt("personID"));
+        if (person != null) {
+            User user = new User(
+                    rs.getInt("userID"), rs.getString("userType"),
+                    rs.getString("login"), rs.getString("pwd"),
+                    person,
+                    rs.getBoolean("blocked"));
 
-        return user;
+            return user;
+        } else return null;
     }
 
     protected void executePrepearedInsert(PreparedStatement pstmt, User user) throws SQLException {
@@ -57,7 +60,8 @@ public class UserList extends AbstractEntityList<User> {
         pstmt.setString(2, user.getLogin());
         pstmt.setString(3, user.getPasswd());
         pstmt.setInt(4, user.getPerson().getId());
-        pstmt.executeUpdate();
+        pstmt.addBatch();
+//        pstmt.executeUpdate();
     }
 
     @Override
@@ -67,7 +71,7 @@ public class UserList extends AbstractEntityList<User> {
 
     public String getSqlText(String type) {
 
-        String sqlText="";
+        String sqlText = "";
 
         if (type.equals("insert")) {
 

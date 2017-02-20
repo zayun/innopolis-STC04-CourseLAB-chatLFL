@@ -50,7 +50,8 @@ public class LanguageList extends AbstractEntityList<Language> {
         pstmt.setString(1, language.getShortName());
         pstmt.setString(2, language.getFullName());
         pstmt.setString(3, language.getDialekt());
-        pstmt.executeUpdate();
+        pstmt.addBatch();
+//        pstmt.executeUpdate();
     }
 
     @Override

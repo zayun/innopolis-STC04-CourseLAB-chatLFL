@@ -1,6 +1,10 @@
 package com.innopolis.smoldyrev.entity.person;
 
+import com.innopolis.smoldyrev.Main;
 import com.innopolis.smoldyrev.entity.AbstractEntityList;
+import com.innopolis.smoldyrev.entity.language.LangOwner;
+import com.innopolis.smoldyrev.entity.language.LangOwnerList;
+import com.innopolis.smoldyrev.entity.language.Language;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,6 +46,8 @@ public class PersonList extends AbstractEntityList<Person> {
     }
 
     protected Person getEntity(ResultSet rs) throws SQLException {
+
+
         Person person = new Person(rs.getInt("personID"),
                 rs.getString("FirstName"), rs.getString("LastName"),
                 rs.getString("email"), rs.getString("phoneNumber"),
@@ -59,7 +65,8 @@ public class PersonList extends AbstractEntityList<Person> {
         pstmt.setString(5, person.getEmail());
         pstmt.setString(6, person.getPhoneNumber());
         pstmt.setBoolean(7, person.isMale());
-        pstmt.executeUpdate();
+        pstmt.addBatch();
+//        pstmt.executeUpdate();
     }
 
     @Override
